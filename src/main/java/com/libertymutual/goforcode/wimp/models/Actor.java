@@ -10,8 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+//import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property="id")
 @Entity
 public class Actor {
 	
@@ -31,7 +36,7 @@ public class Actor {
 	@Column(nullable=true)
 	private Date birthDate;
 	
-	@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(mappedBy="actors")
 	private List<Movie> movies;
 	
