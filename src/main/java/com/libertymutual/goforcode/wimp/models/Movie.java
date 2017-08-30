@@ -1,12 +1,15 @@
 package com.libertymutual.goforcode.wimp.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Movie {
@@ -27,6 +30,9 @@ public class Movie {
 	@Column(length=500, nullable=false)
 	private String distributor;
 	
+	@ManyToMany
+	private List<Actor> actors;
+	
 	public Movie() {}
 	
 	public Movie(String title, Date releaseDate, Long budget, String distributor) {
@@ -39,6 +45,13 @@ public class Movie {
 	public Movie(String title, String distributor) {
 		this.title = title;
 		this.distributor = distributor;
+	}
+	
+	public void addActor(Actor actor) {
+		if (actors == null) {
+			actors = new ArrayList<Actor>();
+		}
+		actors.add(actor);
 	}
 
 	public Long getId() {
@@ -79,6 +92,14 @@ public class Movie {
 
 	public void setDistributor(String distributor) {
 		this.distributor = distributor;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
 	}
 	
 }
