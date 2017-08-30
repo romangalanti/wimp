@@ -41,6 +41,7 @@ public class ActorApiController {
 			throw new StuffNotFoundException();
 		}
 		ActorWithMovies newActor = new ActorWithMovies();
+		newActor.setId(actor.getId());
 		newActor.setActiveSinceYear(actor.getActiveSinceYear());
 		newActor.setBirthDate(actor.getBirthDate());
 		newActor.setMovies(actor.getMovies());
