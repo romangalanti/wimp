@@ -80,7 +80,6 @@ public class ActorApiController {
 	@PostMapping("{actorId}/awards")
 	public Actor associateAnAward(@PathVariable long actorId, @RequestBody Award award) {
 		Award newAward = new Award(award.getTitle(), award.getOrganization(), award.getYear());
-		awardRepo.save(newAward);
 		Actor actor = actorRepo.findOne(actorId);
 		newAward.setActor(actor);
 		awardRepo.save(newAward);

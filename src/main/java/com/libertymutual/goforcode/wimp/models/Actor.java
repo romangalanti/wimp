@@ -1,6 +1,5 @@
 package com.libertymutual.goforcode.wimp.models;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,13 +55,6 @@ public class Actor {
 	
 	public Actor(String firstName) {
 		this.firstName = firstName;
-	}
-	
-	public void addAward(Award award) {
-		if (awards == null) {
-			awards = new ArrayList<Award>();
-		}
-		awards.add(award);
 	}
 
 	public Long getId() {
