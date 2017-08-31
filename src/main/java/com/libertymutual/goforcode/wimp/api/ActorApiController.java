@@ -1,6 +1,5 @@
 package com.libertymutual.goforcode.wimp.api;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -19,8 +18,12 @@ import com.libertymutual.goforcode.wimp.models.Award;
 import com.libertymutual.goforcode.wimp.repositories.ActorRepository;
 import com.libertymutual.goforcode.wimp.repositories.AwardRepository;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/actors")
+@Api(description="Use this to get and create actors, add movies to actors, and add awards to actors.")
 public class ActorApiController {
 	
 	private ActorRepository actorRepo;
@@ -30,14 +33,16 @@ public class ActorApiController {
 		this.actorRepo = actorRepo;
 		this.awardRepo = awardRepo;
 		
-		actorRepo.save(new Actor("Will", "Ferrell", 1995l, new Date(Date.parse("07/16/1967"))));
+//		actorRepo.save(new Actor("Will", "Ferrell", 1995l, new Date(Date.parse("07/16/1967"))));
 	}
 	
+	@ApiOperation(value = "Find all actors.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@GetMapping("")
 	public List<Actor> getAll() {
 		return actorRepo.findAll();
 	}
 	
+	@ApiOperation(value = "Get an actor by actor ID.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@GetMapping("{id}")
 	public Actor getOne(@PathVariable long id) throws StuffNotFoundException {
 		Actor actor = actorRepo.findOne(id);
@@ -55,6 +60,7 @@ public class ActorApiController {
 		return actor;
 	}
 	
+	@ApiOperation(value = "Delete an actor.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@DeleteMapping("{id}")
 	public Actor delete(@PathVariable long id) {
 		try {
@@ -66,17 +72,20 @@ public class ActorApiController {
 		}
 	}
 	
+	@ApiOperation(value = "Create a new actor.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@PostMapping("")
 	public Actor create(@RequestBody Actor actor) {
 		return actorRepo.save(actor);
 	}
 	
+	@ApiOperation(value = "Update an existing actor.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@PutMapping("{id}")
 	public Actor update(@RequestBody Actor actor, @PathVariable long id) {
 		actor.setId(id);
 		return actorRepo.save(actor);
 	}
 	
+	@ApiOperation(value = "Associate an award to an actor.", notes = "HERE'S SOME SUPER AWESOME NOTES!")
 	@PostMapping("{actorId}/awards")
 	public Actor associateAnAward(@PathVariable long actorId, @RequestBody Award award) {
 		Award newAward = new Award(award.getTitle(), award.getOrganization(), award.getYear());
