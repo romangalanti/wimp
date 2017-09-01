@@ -117,7 +117,7 @@ public class ActorApiControllerTests {
 	}
 	
 	@Test
-	public void test_that_a_new_actor_is_update() {
+	public void test_that_an_actor_is_update() {
 		// Arrange
 		Actor actor = new Actor();
 		actor.setId(69L);
